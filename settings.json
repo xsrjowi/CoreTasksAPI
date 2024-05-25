@@ -1,0 +1,13 @@
+{
+    "express": {
+        "app_port": 3000
+    },
+    "database": {
+        "db_host": "127.0.0.1",
+        "db_user": "core",
+        "db_password": "password",
+        "db_name": "tasking",
+        "db_multiple_statements": true,
+        "db_timeout": 60000
+    }
+}
