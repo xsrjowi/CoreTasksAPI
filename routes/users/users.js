@@ -19,14 +19,14 @@ const createUser = async(req, res) => {
     try {
         // TODO: Validator - Ensure that req.body data is válid
 
-        const [result] = await mysql.query(
+        const [rows] = await mysql.query(
             'INSERT INTO Users (name, birth_date, email, password, profile_image) VALUES (?, ?, ?, ?, ?)',
             [name, birth_date, email, password, profile_image]
         )
 
         return res.json({ 
-            id: result.insertId,
-            name: result.name, 
+            id: rows.insertId,
+            name: rows.name, 
             status: 200,
         })
     } catch (error) {
@@ -43,12 +43,12 @@ const editUser = async(req, res) => {
     const { name, birth_date, email, password, profile_image } = req.body
 
     try {
-        const [result] = await mysql.query(
+        const [rows] = await mysql.query(
             'UPDATE Users SET name = ?, birth_date = ?, email = ?, password = ?, profile_image = ? WHERE id = ?',
             [name, birth_date, email, password, profile_image, id]
         )
 
-        return res.json(result, { status: 200 })
+        return res.json(rows, { status: 200 })
     } catch (error) {
         return res.status(500).json({
             error: error.message
@@ -62,12 +62,12 @@ const deleteUser = async (req, res) => {
     const { id } = req.params
     
     try {
-        const [result] = await mysql.query(
+        const [rows] = await mysql.query(
             'DELETE FROM Users WHERE id = ?',
             [id]
         )
 
-        return res.json({ 
+        return res.json(rows, { 
             status: 200
         })
     } catch (error) {
